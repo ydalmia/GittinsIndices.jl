@@ -1,4 +1,5 @@
-"Given the specified discrete stochastic process, compute the gittins 
+"""
+Given the specified discrete stochastic process, compute the gittins 
 index of the starting state. 
 
 m: number of states in stochastic process
