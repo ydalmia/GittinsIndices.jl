@@ -1,4 +1,16 @@
-function calculate_gaussian_gittins(;mu, tau, n, gamma, tol, N, xi, delta)
+"""
+Calculate the gittins index for a given gaussian belief. Takes the following required parameters:
+	mu: mean of gaussian
+	tau: precision (inverse of variance)
+	n: number of times the arm has been pulled
+	gamma: discount factor.
+Also optionally parameters concerning the accuracy of the returned approximation:
+	xi: controls the range of the discretization, i.e. many standard deviations away from the mean to consider discretizing
+	delta: the step size in the discretization of the gaussian
+	N: horizon size, i.e. how many states you hallucinate into the future
+	tol: the fineness of the calculation, given the above params 
+"""
+function calculate_gaussian_gittins(;mu, tau, n, gamma, tol, N=50, xi=3, delta=0.02)
     return nmab_gi(
         Sigma = mu * n, 
         n = n, 

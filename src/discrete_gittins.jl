@@ -1,3 +1,12 @@
+"Given the specified discrete stochastic process, compute the gittins 
+index of the starting state. 
+
+m: number of states in stochastic process
+P: transition matrix between states
+r: reward vector with each entry specifying reward for that state
+initial_state: starting state, whose gittins index will be returned
+gamma: discount factor
+"""
 function calculate_discrete_gittins(m::Int64, P::Matrix{Float64}, r::Vector{Float64}, initial_state::Int64, gamma::Float64)
     bp = BanditProcess(
         m,

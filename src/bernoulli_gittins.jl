@@ -1,4 +1,21 @@
-function calculate_bernoulli_gittins(;alpha, beta, gamma, pulls, tol, N)
+"""
+Calculates bernoulli gittins indices for a given arm prior,
+	parameterized as Beta(alpha, beta). To calculate all the
+	possible states from a given starting prior and a number of pulls,
+	optionally pass the pulls argument. the function will then return 
+	a triangular matrix where gi_matrix[i, j] = gittins index of 
+	beta(alpha + i - 1, beta + j - 1) for i, j >= 1 and i + j <= pulls.
+
+	alpha: current successes
+	beta: current failures
+	gamma: discount factor
+	pulls: optional arg that tells the function how many priors to calculate
+
+Optional args controlling accuracy of approximation:
+	N: how far to hallucinate into the future
+	tol: fineness of approximation given all of the above.
+"""
+function calculate_bernoulli_gittins(;alpha, beta, gamma, pulls=0, tol=1e-3, N=200)
     if pulls == 0
         return bmab_gi_ab(
             alpha=alpha, 
