@@ -29,7 +29,7 @@ gis = calculate_bernoulli_gittins(
     pulls = 100,
 ) 
 gis[1, 1] # corresponds to Beta(2, 3)
-gis[1 + i, 1 + j] # corresponds to Beta(2 + i - 1, 3 + j - 1)
+gis[1 + i, 1 + j] # corresponds to Beta(2 + i, 3 + j)
 ```
 
 Similarly, the package provides functions to precompute gaussian gittin indices and the gittins index for arbitrary stochastic processes. 
