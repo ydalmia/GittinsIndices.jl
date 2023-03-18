@@ -1,3 +1,7 @@
+## Implemented according to
+## Jhelum Chakravorty and Aditya Mahajan 2013
+## Multi-Armed Bandits, Gittins Index, and Its Calculation 
+
 """
 Given the specified discrete stochastic process, compute the gittins 
 index of the starting state. 

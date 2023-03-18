@@ -1,3 +1,7 @@
+## Adapted from:
+## James Edwards 19: Practical Calculation of Gittins Indices for Multi-armed Bandits
+
+
 """
 Calculate the gittins index for a given gaussian belief. Takes the following required parameters:
 	mu: mean of gaussian
@@ -10,7 +14,7 @@ Also optionally parameters concerning the accuracy of the returned approximation
 	N: horizon size, i.e. how many states you hallucinate into the future
 	tol: the fineness of the calculation, given the above params 
 """
-function calculate_gaussian_gittins(;mu, tau, n, gamma, tol, N=50, xi=3, delta=0.02)
+function calculate_gaussian_gittins(;mu, tau, n, gamma, tol=1e-3, N=50, xi=3, delta=0.02)
     return nmab_gi(
         Sigma = mu * n, 
         n = n, 

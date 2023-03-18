@@ -1,3 +1,7 @@
+## Adapted from:
+## James Edwards 19: 
+## Practical Calculation of Gittins Indices for Multi-armed Bandits
+
 """
 Calculates bernoulli gittins indices for a given arm prior,
 	parameterized as Beta(alpha, beta). To calculate all the
