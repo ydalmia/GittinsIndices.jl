@@ -1,5 +1,10 @@
 # GittinsIndices
 
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://ydalmia.github.io/GittinsIndices.jl/stable/)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://ydalmia.github.io/GittinsIndices.jl/dev/)
+[![Build Status](https://github.com/ydalmia/GittinsIndices.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/ydalmia/GittinsIndices.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Coverage](https://codecov.io/gh/ydalmia/GittinsIndices.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/ydalmia/GittinsIndices.jl)
+
 Gittins indices give an optimal solution for the multi armed bandit problem. This package contains utilities to compute the gittins index for three main cases: bernoulli arms, gaussian arms, and arbitrary discrete stochastic processes.
 
 Although traditionally they are used in the infinite, discounted regret setting, they often perform better in practice than incumbent alternatives, even in finite horizon settings:

@@ -1,7 +1,7 @@
 name = "GittinsIndices"
-uuid = "528e2044-b1ef-47f1-a8f4-693ac85d91f9"
-authors = ["Yash Dalmia <yashdalmia111@gmail.com>"]
-version = "0.3.0"
+uuid = "f67fa2ab-001b-4b2e-9919-4d07d35a60e9"
+authors = ["Yash Dalmia", "Santino Ramos", "Amelie Buc"]
+version = "1.0.0-DEV"
 
 [deps]
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
@@ -27,3 +27,9 @@ NLsolve = "4.5.1"
 ProgressLogging = "0.1.4"
 QuadGK = "2.8.2"
 julia = "1.8.5"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
