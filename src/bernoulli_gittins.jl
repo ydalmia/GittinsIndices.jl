@@ -43,14 +43,14 @@ end
 
 
 function bmab_gi_multiple_ab(;
-	alpha_start::Int64, 
-	beta_start::Int64, 
-	gamma::Float64, 
-	N::Int64, 
-	num_actions::Int64, 
-	tol::Float64,
+	alpha_start::Int, 
+	beta_start::Int, 
+	gamma::Float, 
+	N::Int, 
+	num_actions::Int, 
+	tol::Float,
 )	
-	GI = Array{Union{Float64, Missing}, 2}(missing, num_actions, num_actions)
+	GI = Array{Union{Float, Missing}, 2}(missing, num_actions, num_actions)
   	alpha_range = collect(alpha_start:(alpha_start + num_actions - 1))
 	beta_range = collect(beta_start:(beta_start + num_actions - 1))
   	mu = alpha_start ./ (alpha_start .+ beta_range)
@@ -76,13 +76,13 @@ function bmab_gi_multiple_ab(;
 end
 
 function bmab_gi_ab(;
-	alpha::Int64, 
-	beta::Int64, 
-	gamma::Float64,
-	tol::Float64, 
-	N::Int64, 
-	lb::Union{Float64, Int64, Nothing} = nothing, 
-	ub::Union{Float64, Int64, Nothing} = nothing,
+	alpha::Int, 
+	beta::Int, 
+	gamma::Float,
+	tol::Float, 
+	N::Int, 
+	lb::Union{Float, Int, Nothing} = nothing, 
+	ub::Union{Float, Int, Nothing} = nothing,
 )
 	return bmab_gi(
 		Sigma = alpha, 
@@ -107,7 +107,7 @@ function calibrate_arm(f, lb, ub, tol, other_args...)
 	return [lb, ub]
 end
 
-function bmab_giplus_value(lambda, Sigma::Int64, n::Int64, gamma::Float64)
+function bmab_giplus_value(lambda, Sigma::Int, n::Int, gamma::Float)
 	mu = Sigma / n
 	mu_success = (Sigma + 1) / (n + 1)
 	H = gamma / (1 - gamma)
@@ -125,10 +125,10 @@ function bmab_giplus_value(lambda, Sigma::Int64, n::Int64, gamma::Float64)
 end
 
 function bmab_giplus(
-	Sigma::Int64, 
-	n::Int64, 
-	gamma::Float64, 
-	tol::Float64, 
+	Sigma::Int, 
+	n::Int, 
+	gamma::Float, 
+	tol::Float, 
 	upper::Bool = false,
 )
 	interval = calibrate_arm(
@@ -149,9 +149,9 @@ function bmab_giplus(
 end
 
 function bmab_kgi(
-	Sigma::Union{Array{Int64}, Int64}, 
-	n::Union{Array{Int64}, Int64},
-	gamma::Float64,
+	Sigma::Union{Array{Int}, Int}, 
+	n::Union{Array{Int}, Int},
+	gamma::Float,
 )
   	mu = Sigma ./ n
   	H = gamma / (1 - gamma)
@@ -168,7 +168,7 @@ function bmab_gi_value(lambda, Sigma, n, gamma, N)
 	
 	mu = s_vec ./ transpose(n_vec)
 	
-	value_mat = Array{Union{Missing, Float64}, 2}(missing, h, h)
+	value_mat = Array{Union{Missing, Float}, 2}(missing, h, h)
 	
 	# Values of end states
 	value_mat[:, h] = max.(mu[:, h], lambda) .* gamma .^ N / (1 - gamma)
@@ -187,13 +187,13 @@ function bmab_gi_value(lambda, Sigma, n, gamma, N)
 end
 
 function bmab_gi(;
-	Sigma::Int64, 
-	n::Int64, 
-	gamma::Float64, 
-	N::Int64, 
-	tol::Float64,
-	lb::Union{Float64, Int64, Nothing} = nothing, 
-	ub::Union{Float64, Int64, Nothing} = nothing,
+	Sigma::Int, 
+	n::Int, 
+	gamma::Float, 
+	N::Int, 
+	tol::Float,
+	lb::Union{Float, Int, Nothing} = nothing, 
+	ub::Union{Float, Int, Nothing} = nothing,
 )
 	if isnothing(lb)
 		lb = bmab_kgi(Sigma, n, gamma)
