@@ -14,4 +14,8 @@ using Test
     @testset "discrete_gittins" begin
         include("test_discrete_gittins.jl")
     end 
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> f8fcb6c (use package tempaltes)
