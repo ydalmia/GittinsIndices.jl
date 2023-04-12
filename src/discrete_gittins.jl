@@ -12,7 +12,7 @@ r: reward vector with each entry specifying reward for that state
 initial_state: starting state, whose gittins index will be returned
 gamma: discount factor
 """
-function calculate_discrete_gittins(m::Int, P::Matrix{Float}, r::Vector{Float}, initial_state::Int, gamma::Float)
+function calculate_discrete_gittins(m::Int, P::Matrix{Float64}, r::Vector{Float64}, initial_state::Int, gamma::Float64)
     bp = BanditProcess(
         m,
         P, 
@@ -27,10 +27,10 @@ end
 
 struct BanditProcess
 	m::Int # cardinality of state space
-	P::Matrix{Float} # transition matrix
-	r::Vector{Float} # reward vector
+	P::Matrix{Float64} # transition matrix
+	r::Vector{Float64} # reward vector
 	s₀::Int # initial state
-	β::Float # discount factor
+	β::Float64 # discount factor
 end
 
 ### 24.4.2 Linear Programming Formulation (Chen and Katehakis)
@@ -66,11 +66,11 @@ end
 
 ### 24.1.1 Restart Formulation (Katehakis and Veinott)
 struct KatehakisVeinottRestartFormulation
-	Q⁰::Matrix{Float} # transition matrix for restart option
-	r⁰::Vector{Float} # instaneous reward for restart option
-	Q¹::Matrix{Float} # transition matrix for continuation option
-	r¹::Vector{Float} # instaneous reward for continuation option
-	β::Float # discount factor
+	Q⁰::Matrix{Float64} # transition matrix for restart option
+	r⁰::Vector{Float64} # instaneous reward for restart option
+	Q¹::Matrix{Float64} # transition matrix for continuation option
+	r¹::Vector{Float64} # instaneous reward for continuation option
+	β::Float64 # discount factor
 	α::Int # initial start
 	
 	function KatehakisVeinottRestartFormulation(bp::BanditProcess)
@@ -91,7 +91,7 @@ struct KatehakisVeinottRestartFormulation
 end
 
 function solve(kv::KatehakisVeinottRestartFormulation)
-	function f(v::Vector{Float}, kv::KatehakisVeinottRestartFormulation)
+	function f(v::Vector{Float64}, kv::KatehakisVeinottRestartFormulation)
 		return max.(
 			kv.r⁰ + kv.β * kv.Q⁰ * v, 
 			kv.r¹ + kv.β * kv.Q¹ * v,

@@ -28,7 +28,7 @@ function calculate_gaussian_gittins(;mu, tau, n, gamma, tol=1e-3, N=50, xi=3, de
 end
 
 
-function calibrate_arm(f::Function, lb::Union{Int, Float}, ub::Float, tol::Float, other_args...)
+function calibrate_arm(f::Function, lb::Union{Int, Float64}, ub::Float64, tol::Float64, other_args...)
 	while (ub - lb) > tol
 		lambda = lb + (ub - lb) / 2
 		if f(lambda, other_args...) > 0
@@ -40,12 +40,12 @@ function calibrate_arm(f::Function, lb::Union{Int, Float}, ub::Float, tol::Float
 	return [lb, ub]
 end
 
-function nmab_giplus_value(lambda, mu, n, gamma::Float)
+function nmab_giplus_value(lambda, mu, n, gamma::Float64)
 	sd = sqrt(1 / n)
 	return mu + gamma * pdf(Normal(), lambda / sd) * sd / (1 - gamma * cdf(Normal(), lambda / sd)) - lambda
 end
 
-function nmab_giplus(;Sigma::Union{Float, Int}, n::Int, gamma::Float, tol::Float, ub = nothing, upper::Bool = false)
+function nmab_giplus(;Sigma::Union{Float64, Int}, n::Int, gamma::Float64, tol::Float64, ub = nothing, upper::Bool = false)
 	if isnothing(ub)
 		ub = gamma / (1 - gamma) / sqrt(n)
 	end
@@ -62,14 +62,14 @@ function nmab_giplus(;Sigma::Union{Float, Int}, n::Int, gamma::Float, tol::Float
   	return mean(interval)
 end
 
-function nmab_kgi_value(lambda, mu, n::Int, gamma::Float, tau::Int)
+function nmab_kgi_value(lambda, mu, n::Int, gamma::Float64, tau::Int)
 	sigt = sqrt(1 / n - 1 / (n + tau))
 	z = (mu - lambda) / sigt
 	v = sigt * (z * cdf(Normal(), z) + pdf(Normal(), z))
   	return v * gamma / (1 - gamma) + mu - lambda
 end
 
-function nmab_kgi(;Sigma::Union{Float, Int}, n::Int, gamma::Float, tau::Int, tol::Float, ub = nothing, lower=false)
+function nmab_kgi(;Sigma::Union{Float64, Int}, n::Int, gamma::Float64, tau::Int, tol::Float64, ub = nothing, lower=false)
 	if isnothing(ub)
 		ub = gamma / (1 - gamma) / sqrt(n)
 	end
@@ -87,14 +87,14 @@ function nmab_kgi(;Sigma::Union{Float, Int}, n::Int, gamma::Float, tau::Int, tol
 end
 
 function nmab_risky_reward(;
-	mu::Float, 
+	mu::Float64, 
 	y_lo_scaled, 
 	y_hi_scaled, 
 	tn_scaled, 
 	tau::Int, 
 	s, 
-	value_vec::Vector{Float}, 
-	discount::Union{Float, Int},
+	value_vec::Vector{Float64}, 
+	discount::Union{Float64, Int},
 )
   yhi = y_hi_scaled .- mu .* tn_scaled
   ylo = y_lo_scaled .- mu .* tn_scaled
@@ -105,7 +105,7 @@ function nmab_risky_reward(;
   )
 end
 
-function nmab_gi_value(lambda::Float, n::Int, gamma::Float, tau::Int, N::Int, xi::Union{Int, Float}, delta::Float)
+function nmab_gi_value(lambda::Float64, n::Int, gamma::Float64, tau::Int, N::Int, xi::Union{Int, Float64}, delta::Float64)
 	extra = 1 # number of extra xi used for new states
 	h = N + 1
 	delta = delta / sqrt(n) # adjust delta so number of states is constant with n
@@ -115,7 +115,7 @@ function nmab_gi_value(lambda::Float, n::Int, gamma::Float, tau::Int, N::Int, xi
 	lr2 = 0 : delta : (xi * sqrt(1 / n))
 	lr2 = length(collect(lr2))
 	
-	value = zeros(Float, h, lr)
+	value = zeros(Float64, h, lr)
 	
 	# Value of end states (at stage N)
 	value[h, :] = max.(mu_range, lambda) .* (gamma ^ N / (1 - gamma))
@@ -175,7 +175,7 @@ function nmab_gi_value(lambda::Float, n::Int, gamma::Float, tau::Int, N::Int, xi
 	return (risky_reward - lambda / (1 - gamma))
 end
 
-function nmab_gi(;Sigma::Union{Float, Int}, n::Int, gamma::Float, tau::Int, tol::Float, N::Int, xi::Union{Float, Int}, delta::Float, lb=nothing, ub=nothing)
+function nmab_gi(;Sigma::Union{Float64, Int}, n::Int, gamma::Float64, tau::Int, tol::Float64, N::Int, xi::Union{Float64, Int}, delta::Float64, lb=nothing, ub=nothing)
 	if isnothing(lb)
 		lb = nmab_kgi(
 			Sigma = 0, 

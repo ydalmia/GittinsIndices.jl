@@ -45,12 +45,12 @@ end
 function bmab_gi_multiple_ab(;
 	alpha_start::Int, 
 	beta_start::Int, 
-	gamma::Float, 
+	gamma::Float64, 
 	N::Int, 
 	num_actions::Int, 
-	tol::Float,
+	tol::Float64,
 )	
-	GI = Array{Union{Float, Missing}, 2}(missing, num_actions, num_actions)
+	GI = Array{Union{Float64, Missing}, 2}(missing, num_actions, num_actions)
   	alpha_range = collect(alpha_start:(alpha_start + num_actions - 1))
 	beta_range = collect(beta_start:(beta_start + num_actions - 1))
   	mu = alpha_start ./ (alpha_start .+ beta_range)
@@ -78,11 +78,11 @@ end
 function bmab_gi_ab(;
 	alpha::Int, 
 	beta::Int, 
-	gamma::Float,
-	tol::Float, 
+	gamma::Float64,
+	tol::Float64, 
 	N::Int, 
-	lb::Union{Float, Int, Nothing} = nothing, 
-	ub::Union{Float, Int, Nothing} = nothing,
+	lb::Union{Float64, Int, Nothing} = nothing, 
+	ub::Union{Float64, Int, Nothing} = nothing,
 )
 	return bmab_gi(
 		Sigma = alpha, 
@@ -107,7 +107,7 @@ function calibrate_arm(f, lb, ub, tol, other_args...)
 	return [lb, ub]
 end
 
-function bmab_giplus_value(lambda, Sigma::Int, n::Int, gamma::Float)
+function bmab_giplus_value(lambda, Sigma::Int, n::Int, gamma::Float64)
 	mu = Sigma / n
 	mu_success = (Sigma + 1) / (n + 1)
 	H = gamma / (1 - gamma)
@@ -127,8 +127,8 @@ end
 function bmab_giplus(
 	Sigma::Int, 
 	n::Int, 
-	gamma::Float, 
-	tol::Float, 
+	gamma::Float64, 
+	tol::Float64, 
 	upper::Bool = false,
 )
 	interval = calibrate_arm(
@@ -151,7 +151,7 @@ end
 function bmab_kgi(
 	Sigma::Union{Array{Int}, Int}, 
 	n::Union{Array{Int}, Int},
-	gamma::Float,
+	gamma::Float64,
 )
   	mu = Sigma ./ n
   	H = gamma / (1 - gamma)
@@ -168,7 +168,7 @@ function bmab_gi_value(lambda, Sigma, n, gamma, N)
 	
 	mu = s_vec ./ transpose(n_vec)
 	
-	value_mat = Array{Union{Missing, Float}, 2}(missing, h, h)
+	value_mat = Array{Union{Missing, Float64}, 2}(missing, h, h)
 	
 	# Values of end states
 	value_mat[:, h] = max.(mu[:, h], lambda) .* gamma .^ N / (1 - gamma)
@@ -189,11 +189,11 @@ end
 function bmab_gi(;
 	Sigma::Int, 
 	n::Int, 
-	gamma::Float, 
+	gamma::Float64, 
 	N::Int, 
-	tol::Float,
-	lb::Union{Float, Int, Nothing} = nothing, 
-	ub::Union{Float, Int, Nothing} = nothing,
+	tol::Float64,
+	lb::Union{Float64, Int, Nothing} = nothing, 
+	ub::Union{Float64, Int, Nothing} = nothing,
 )
 	if isnothing(lb)
 		lb = bmab_kgi(Sigma, n, gamma)
