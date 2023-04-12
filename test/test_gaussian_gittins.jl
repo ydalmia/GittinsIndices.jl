@@ -1,15 +1,15 @@
 function test_gaussian_gittins_single()
-    n = 2
+    n = Int64(2)
     gamma = 0.8
 
     gi = calculate_gaussian_gittins(
-        mu = 0, 
-        tau = 1, 
+        mu = Int64(0), 
+        tau = Int64(1), 
         n = n, 
         gamma = gamma, 
         tol = 1e-4, 
-        N = 100,
-        xi = 3,
+        N = Int64(100),
+        xi = Int64(3),
         delta = 0.02,
     )
     
