@@ -1,7 +1,7 @@
 name = "GittinsIndices"
 uuid = "528e2044-b1ef-47f1-a8f4-693ac85d91f9"
 authors = ["Yash Dalmia <yashdalmia111@gmail.com>"]
-version = "0.2.0"
+version = "0.3.0"
 
 [deps]
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
