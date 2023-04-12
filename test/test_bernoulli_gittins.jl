@@ -1,11 +1,11 @@
 function test_calculate_bernoulli_gittins_multiple()
     gi = calculate_bernoulli_gittins(
-        alpha=1,
-        beta=1,
+        alpha=Int64(1),
+        beta=Int64(1),
         gamma=0.9,
-        pulls=3,
+        pulls=Int64(3),
         tol=1e-4,
-        N=200,
+        N=Int64(200),
     )
 
     expected_gi = [
@@ -30,12 +30,12 @@ end
 
 function test_calculate_bernoulli_gittins_single()
     gi = calculate_bernoulli_gittins(
-        alpha=1,
-        beta=1,
+        alpha=Int64(1),
+        beta=Int64(1),
         gamma=0.9,
-        pulls=0,
+        pulls=Int64(0),
         tol=1e-4,
-        N=200,
+        N=Int64(200),
     )
 
     expected_gi = 0.7029

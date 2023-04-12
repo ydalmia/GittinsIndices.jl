@@ -1,6 +1,6 @@
 function test_discrete_gittins_against_each_other()
     bp = GittinsIndices.BanditProcess(
-        4,
+        Int64(4),
         [
             0.1 0 0.8 0.1; 
             0.5 0 0.1 0.4; 
@@ -8,7 +8,7 @@ function test_discrete_gittins_against_each_other()
             0 0.8 0 0.2
         ],
         [16.0, 19.0, 30.0, 4.0],
-        2,
+        Int64(2),
         0.75
     )
     sol_chen_katehakis = GittinsIndices.solve(
@@ -22,7 +22,7 @@ end
 
 function test_calculate_discrete_gittins()
     gi = calculate_discrete_gittins(
-        4,
+        Int64(4),
         [
             0.1 0 0.8 0.1; 
             0.5 0 0.1 0.4; 
@@ -30,14 +30,14 @@ function test_calculate_discrete_gittins()
             0 0.8 0 0.2
         ],
         [16.0, 19.0, 30.0, 4.0],
-        2,
+        Int64(2),
         0.75,
     )
 
     gi2 = GittinsIndices.solve(
         GittinsIndices.ChenKatehakisLinearProgramming(
             GittinsIndices.BanditProcess(
-                4,
+                Int64(4),
                 [
                     0.1 0 0.8 0.1; 
                     0.5 0 0.1 0.4; 
@@ -45,7 +45,7 @@ function test_calculate_discrete_gittins()
                     0 0.8 0 0.2
                 ],
                 [16.0, 19.0, 30.0, 4.0],
-                2,
+                Int64(2),
                 0.75
             )
         )
