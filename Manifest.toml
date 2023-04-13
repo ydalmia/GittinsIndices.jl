@@ -2,7 +2,7 @@
 
 julia_version = "1.8.5"
 manifest_format = "2.0"
-project_hash = "14ba1816fb223f0f61a4fb2ffa7e36430b9e6c6d"
+project_hash = "286587ac0bf7b2e45d275ea9407d32c54fcbdec6"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -313,12 +313,6 @@ deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Li
 git-tree-sha1 = "9b02998aba7bf074d14de89f9d37ca24a1a0b046"
 uuid = "78b55507-aeef-58d4-861c-77aaff3498b1"
 version = "0.21.0+0"
-
-[[deps.GittinsIndices]]
-deps = ["BenchmarkTools", "Bijections", "Distributions", "Documenter", "HiGHS", "JuMP", "Latexify", "LinearAlgebra", "NLsolve", "Plots", "ProgressLogging", "ProgressMeter", "QuadGK", "Statistics", "Test"]
-path = ".."
-uuid = "f67fa2ab-001b-4b2e-9919-4d07d35a60e9"
-version = "1.0.0-DEV"
 
 [[deps.Glib_jll]]
 deps = ["Artifacts", "Gettext_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Libiconv_jll", "Libmount_jll", "PCRE2_jll", "Pkg", "Zlib_jll"]
